@@ -24,4 +24,11 @@ module.exports = {
       res.send(product);
     });
   },
+  all_products: function (req, res, next) {
+    Product.find({}, function (err, product) {
+      if (err) throw err;
+
+      res.send(product);
+    });
+  },
 };

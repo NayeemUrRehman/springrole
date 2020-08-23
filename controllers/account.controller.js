@@ -29,10 +29,11 @@ module.exports = {
   },
   search_by_email: async (req, res, next) => {
     const { email } = req.query;
-    Account.find({email:email}, function (err, account) {
-      if (err) throw err;
-
-      res.send(account);
-    });
+    Account.find({ email: email })
+      .populate("orders")
+      .exec((err, account) => {
+        if (err) next(err);
+        res.send(account);
+      });
   },
 };
